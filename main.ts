@@ -64,7 +64,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (Mouse.overlapsWith(Button4)) {
         story.showPlayerChoices("Write new document (if you do this on a document that has data it overwrites it)", "Cancel", "Open document")
         if (story.checkLastAnswer("Write new document (if you do this on a document that has data it overwrites it)")) {
-            Document1text = game.askForString("Your document to contain...", 19)
+            Document1text = game.askForString("Your document will contain...", 24)
             doc_text_to_add_to_doc = game.askForNumber("What document do you want to add this text to?", 1)
             if (doc_text_to_add_to_doc == 1) {
                 blockSettings.writeString("Doc1text", Document1text)
@@ -256,32 +256,32 @@ if (blockSettings.exists("Mouse type")) {
     story.printText("Thank you, the information is saved press help for more info on how this OS will work", 60, 10)
     blockSettings.writeString("USERNAME", Name)
     blockSettings.writeNumber("Mouse type", mouse_type)
-    Loading = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Player)
-    animation.runImageAnimation(
-    Loading,
-    assets.animation`Loading wheel`,
-    50,
-    true
-    )
-    Loading.destroy(effects.coolRadial, 1000)
 }
+Loading = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    `, SpriteKind.Player)
+animation.runImageAnimation(
+Loading,
+assets.animation`Loading wheel`,
+50,
+true
+)
+Loading.destroy(effects.coolRadial, 1000)
 scene.setBackgroundImage(assets.image`BG image`)
 Button1 = sprites.create(assets.image`Clock`, SpriteKind.Button)
 Button2 = sprites.create(assets.image`music`, SpriteKind.Button)
