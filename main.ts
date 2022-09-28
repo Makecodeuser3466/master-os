@@ -256,6 +256,31 @@ if (blockSettings.exists("Mouse type")) {
     story.printText("Thank you, the information is saved press help for more info on how this OS will work", 60, 10)
     blockSettings.writeString("USERNAME", Name)
     blockSettings.writeNumber("Mouse type", mouse_type)
+    Loading = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Player)
+    animation.runImageAnimation(
+    Loading,
+    assets.animation`Loading wheel`,
+    50,
+    true
+    )
+    Loading.destroy(effects.coolRadial, 1000)
 }
 scene.setBackgroundImage(assets.image`BG image`)
 Button1 = sprites.create(assets.image`Clock`, SpriteKind.Button)
