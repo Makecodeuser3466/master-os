@@ -59,6 +59,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         sprites.destroyAllSpritesOfKind(SpriteKind.Button)
         Mouse.destroy()
         scene.setBackgroundImage(assets.image`RSOD`)
+        SUN.destroy(effects.coolRadial, 1000)
         music.playMelody("C5 C5 C5 C5 C5 C5 C5 C5 ", 120)
     }
     if (Mouse.overlapsWith(Button4)) {
@@ -70,37 +71,28 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 blockSettings.writeString("Doc1text", Document1text)
             }
             if (doc_text_to_add_to_doc == 2) {
-                blockSettings.writeString("Doc1text", Document1text)
+                blockSettings.writeString("Doc2text", Document1text)
             }
-        }
-        if (story.checkLastAnswer("Remove document")) {
-            Remove_document = game.askForNumber("What document do you want to remove", 1)
-            if (Remove_document == 1) {
-                blockSettings.remove("Doc1text")
+            if (doc_text_to_add_to_doc == 3) {
+                blockSettings.writeString("Doc3text", Document1text)
             }
-            if (Remove_document == 2) {
-                blockSettings.remove("Doc2text")
+            if (doc_text_to_add_to_doc == 4) {
+                blockSettings.writeString("Doc4text", Document1text)
             }
-            if (Remove_document == 3) {
-                blockSettings.remove("Doc3text")
+            if (doc_text_to_add_to_doc == 5) {
+                blockSettings.writeString("Doc5text", Document1text)
             }
-            if (Remove_document == 4) {
-                blockSettings.remove("Doc4text")
+            if (doc_text_to_add_to_doc == 6) {
+                blockSettings.writeString("Doc6text", Document1text)
             }
-            if (Remove_document == 5) {
-                blockSettings.remove("Doc5text")
+            if (doc_text_to_add_to_doc == 7) {
+                blockSettings.writeString("Doc7text", Document1text)
             }
-            if (Remove_document == 6) {
-                blockSettings.remove("Doc6text")
+            if (doc_text_to_add_to_doc == 8) {
+                blockSettings.writeString("Doc8text", Document1text)
             }
-            if (Remove_document == 7) {
-                blockSettings.remove("Doc7text")
-            }
-            if (Remove_document == 8) {
-                blockSettings.remove("Doc8text")
-            }
-            if (Remove_document == 9) {
-                blockSettings.remove("Doc9text")
+            if (doc_text_to_add_to_doc == 9) {
+                blockSettings.writeString("Doc9text", Document1text)
             }
         }
         if (story.checkLastAnswer("Open document")) {
@@ -188,7 +180,6 @@ let answer_to_math_problem = 0
 let _2 = 0
 let _1 = 0
 let Open_document = 0
-let Remove_document = 0
 let doc_text_to_add_to_doc = 0
 let Document1text = ""
 let Virus_sprite: Sprite = null
@@ -205,11 +196,20 @@ let Button2: Sprite = null
 let Button1: Sprite = null
 let mouse_type = 0
 let Name = ""
+let SUN: Sprite = null
 pause(2000)
 music.jumpUp.play()
 scene.setBackgroundImage(assets.image`Intro`)
 pause(2000)
 scene.setBackgroundImage(assets.image`BG image`)
+SUN = sprites.create(assets.image`SUN`, SpriteKind.Player)
+animation.runImageAnimation(
+SUN,
+assets.animation`SUNAnim`,
+500,
+true
+)
+SUN.setPosition(22, 26)
 pause(2000)
 let Loading = sprites.create(img`
     . . . . . . . . . . . . . . . . 
@@ -291,7 +291,6 @@ Button4 = sprites.create(assets.image`Documents`, SpriteKind.Button)
 Button5 = sprites.create(assets.image`Help`, SpriteKind.Button)
 Button6 = sprites.create(assets.image`Math`, SpriteKind.Button)
 Button7 = sprites.create(assets.image`Jokes`, SpriteKind.Button)
-let SUN = sprites.create(assets.image`SUN`, SpriteKind.Player)
 Button1.setPosition(142, 101)
 Button2.setPosition(74, 101)
 Button3.setPosition(36, 101)
@@ -299,8 +298,6 @@ Button4.setPosition(108, 101)
 Button5.setPosition(143, 11)
 Button6.setPosition(149, 43)
 Button7.setPosition(146, 71)
-SUN.setPosition(22, 26)
-SUN.startEffect(effects.warmRadial)
 Mouse = sprites.create(assets.image`Mouse2`, SpriteKind.Player)
 Mouse.setStayInScreen(true)
 if (mouse_type == 2) {
