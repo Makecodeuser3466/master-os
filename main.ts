@@ -60,7 +60,8 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         Mouse.destroy()
         scene.setBackgroundImage(assets.image`RSOD`)
         SUN.destroy(effects.coolRadial, 1000)
-        music.playMelody("C5 C5 C5 C5 C5 C5 C5 C5 ", 120)
+        music.playTone(988, music.beat(BeatFraction.Breve))
+        music.playTone(988, music.beat(BeatFraction.Breve))
     }
     if (Mouse.overlapsWith(Button4)) {
         story.showPlayerChoices("Write new document (if you do this on a document that has data it overwrites it)", "Cancel", "Open document")
@@ -105,7 +106,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
     if (Mouse.overlapsWith(Button5)) {
-        game.showLongText("Help manual: STEP 1: Using the math app: When you are using the math app move you mouse too the math button and press B. Then use up and down to select your math type then type the two numbers to calculate. STEP 2: Using the Clock app: Move your mouse to the clock app and press B. then select when you timer ring (in milliseconds) the type in your timer name then when the time is up the timer will ring making a noise and saying it is ready. STEP 3: Using the music app: Move your mouse to the music app and press B. then type in (from 0 to 9) your music disk and when you enter it in it will play. STEP 4: Using the documents app: Move your mouse to the document's app and press B. the to write a document select the write a document option then write in what you want it to contain then save it in a slot. then if you want to open it select open a document then select the slot you saved it in. STEP 5: How to use the virus's app: don't open or it will destroy your system", DialogLayout.Full)
+        game.showLongText("Help manual: STEP 1: Using the math app: When you are using the math app move you mouse too the math button and press B. Then use up and down to select your math type then type the two numbers to calculate. STEP 2: Using the Clock app: Move your mouse to the clock app and press B. then select when you timer ring (in milliseconds) the type in your timer name then when the time is up the timer will ring making a noise and saying it is ready. STEP 3: Using the music app: Move your mouse to the music app and press B. then type in (from 0 to 9) your music disk and when you enter it in it will play. STEP 4: Using the documents app: Move your mouse to the document's app and press B. the to write a document select the write a document option then write in what you want it to contain then save it in a slot. then if you want to open it select open a document then select the slot you saved it in. STEP 5: How to use the virus's app: don't open or it will destroy your system. MASTER ®", DialogLayout.Full)
     }
     if (Mouse.overlapsWith(Button6)) {
         story.showPlayerChoices(". + .", ". - .", ". * .", ". / .")
@@ -136,6 +137,14 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     }
     if (Mouse.overlapsWith(Button7)) {
         story.printText("Here's a joke for you! " + Jokes[randint(1, 23)], 60, 10, 8, 1, story.TextSpeed.Slow)
+    }
+    if (Mouse.overlapsWith(Button8)) {
+        password = game.askForNumber("Enter in the owner's password", 4)
+        if (password == 4729) {
+            story.printText("Correct! you are the owner!", 60, 40)
+        } else {
+            story.printText("Wrong! you are not the owner!", 60, 40)
+        }
     }
 })
 function clear_disk () {
@@ -175,6 +184,7 @@ sprites.onCreated(SpriteKind.Button, function (sprite) {
 controller.combos.attachCombo("A+B+u", function () {
     clear_disk()
 })
+let password = 0
 let Jokes: string[] = []
 let answer_to_math_problem = 0
 let _2 = 0
@@ -187,6 +197,7 @@ let time_for = ""
 let time = 0
 let music_played = 0
 let Mouse: Sprite = null
+let Button8: Sprite = null
 let Button7: Sprite = null
 let Button6: Sprite = null
 let Button5: Sprite = null
@@ -197,6 +208,9 @@ let Button1: Sprite = null
 let mouse_type = 0
 let Name = ""
 let SUN: Sprite = null
+color.setPalette(
+color.originalPalette
+)
 pause(2000)
 music.jumpUp.play()
 scene.setBackgroundImage(assets.image`Intro`)
@@ -291,6 +305,7 @@ Button4 = sprites.create(assets.image`Documents`, SpriteKind.Button)
 Button5 = sprites.create(assets.image`Help`, SpriteKind.Button)
 Button6 = sprites.create(assets.image`Math`, SpriteKind.Button)
 Button7 = sprites.create(assets.image`Jokes`, SpriteKind.Button)
+Button8 = sprites.create(assets.image`Confirm owner status`, SpriteKind.Button)
 Button1.setPosition(142, 101)
 Button2.setPosition(74, 101)
 Button3.setPosition(36, 101)
@@ -298,6 +313,7 @@ Button4.setPosition(108, 101)
 Button5.setPosition(143, 11)
 Button6.setPosition(149, 43)
 Button7.setPosition(146, 71)
+Button8.setPosition(11, 100)
 Mouse = sprites.create(assets.image`Mouse2`, SpriteKind.Player)
 Mouse.setStayInScreen(true)
 if (mouse_type == 2) {
@@ -306,5 +322,5 @@ if (mouse_type == 2) {
 if (mouse_type == 1) {
     Mouse.setImage(assets.image`Mouse0`)
 }
-controller.moveSprite(Mouse)
+controller.moveSprite(Mouse, 100, 100)
 Write_down_jokes_list()
